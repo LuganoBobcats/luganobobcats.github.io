@@ -4,888 +4,513 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lugano Bobcats – Give Every Kid a Basket and a Ball</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --orange: #F05A28;
-    --orange-dark: #C03E14;
-    --orange-light: #FF8C5A;
-    --black: #0D0D0D;
-    --white: #F7F4EF;
-    --gray: #888;
-    --gray-light: #E8E4DC;
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2rem;
-    background: rgba(13,13,13,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(240,90,40,0.2);
-  }
-
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    letter-spacing: 2px;
-    color: var(--orange);
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-
-  .nav-links a:hover { opacity: 1; color: var(--orange); }
-
-  .nav-cta {
-    background: var(--orange);
-    color: var(--black) !important;
-    padding: 0.5rem 1.2rem;
-    border-radius: 2px;
-    opacity: 1 !important;
-    font-weight: 600;
-    transition: background 0.2s !important;
-  }
-
-  .nav-cta:hover { background: var(--orange-light) !important; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 8rem 2rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 80% 50%, rgba(240,90,40,0.15) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .hero-court {
-    position: absolute;
-    right: -80px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 500px;
-    height: 500px;
-    border: 2px solid rgba(240,90,40,0.15);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .hero-court::before {
-    content: '';
-    position: absolute;
-    inset: 40px;
-    border: 1px solid rgba(240,90,40,0.08);
-    border-radius: 50%;
-  }
-
-  .hero-eyebrow {
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 1.5rem;
-  }
-
-  h1 {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 10vw, 9rem);
-    line-height: 0.9;
-    letter-spacing: 2px;
-    max-width: 800px;
-    margin-bottom: 2rem;
-  }
-
-  h1 span { color: var(--orange); }
-
-  .hero-sub {
-    font-size: 1.1rem;
-    max-width: 480px;
-    color: rgba(247,244,239,0.7);
-    margin-bottom: 3rem;
-    font-weight: 300;
-    line-height: 1.8;
-  }
-
-  .hero-deadline {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .countdown-box {
-    background: rgba(240,90,40,0.1);
-    border: 1px solid rgba(240,90,40,0.3);
-    padding: 0.8rem 1.2rem;
-    text-align: center;
-    min-width: 70px;
-  }
-
-  .countdown-num {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    color: var(--orange);
-    line-height: 1;
-    display: block;
-  }
-
-  .countdown-label {
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(247,244,239,0.5);
-  }
-
-  .countdown-sep {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    color: rgba(240,90,40,0.4);
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: var(--orange);
-    color: var(--black);
-    padding: 1rem 2.5rem;
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.2s, transform 0.1s;
-  }
-
-  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); }
-
-  .btn-secondary {
-    border: 1px solid rgba(247,244,239,0.3);
-    color: var(--white);
-    padding: 1rem 2.5rem;
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    text-decoration: none;
-    display: inline-block;
-    transition: border-color 0.2s, transform 0.1s;
-  }
-
-  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
-
-  /* PROGRESS BAR */
-  .progress-section {
-    padding: 4rem 2rem;
-    border-top: 1px solid rgba(247,244,239,0.08);
-    border-bottom: 1px solid rgba(247,244,239,0.08);
-  }
-
-  .progress-inner {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .progress-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .stat-item { }
-
-  .stat-num {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    color: var(--orange);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(247,244,239,0.5);
-    margin-top: 0.3rem;
-  }
-
-  .progress-bar-wrap {
-    background: rgba(247,244,239,0.08);
-    height: 6px;
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 0.8rem;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--orange);
-    border-radius: 3px;
-    width: 0%;
-    transition: width 2s cubic-bezier(0.4,0,0.2,1);
-  }
-
-  .progress-note {
-    font-size: 0.8rem;
-    color: rgba(247,244,239,0.4);
-  }
-
-  /* SECTIONS */
-  section {
-    padding: 6rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1;
-    letter-spacing: 1px;
-    margin-bottom: 2rem;
-  }
-
-  /* STORY */
-  .story-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .story-text p {
-    color: rgba(247,244,239,0.75);
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-    line-height: 1.9;
-  }
-
-  .story-text p strong {
-    color: var(--orange);
-    font-weight: 600;
-  }
-
-  .tribute-box {
-    border-left: 3px solid var(--orange);
-    padding: 1.5rem 2rem;
-    background: rgba(240,90,40,0.06);
-  }
-
-  .tribute-box p {
-    font-style: italic;
-    color: rgba(247,244,239,0.85);
-    line-height: 1.9;
-    font-size: 1.05rem;
-  }
-
-  .tribute-sig {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    color: var(--orange);
-    letter-spacing: 1px;
-  }
-
-  /* WHERE THE MONEY GOES */
-  .funds-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .fund-card {
-    border: 1px solid rgba(247,244,239,0.1);
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
-  .fund-card:hover { border-color: rgba(240,90,40,0.4); }
-
-  .fund-card::before {
-    content: attr(data-pct);
-    position: absolute;
-    top: 1rem;
-    right: 1.2rem;
-    font-family: var(--font-display);
-    font-size: 4rem;
-    color: rgba(240,90,40,0.1);
-    line-height: 1;
-  }
-
-  .fund-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .fund-title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-  }
-
-  .fund-desc {
-    font-size: 0.9rem;
-    color: rgba(247,244,239,0.6);
-    line-height: 1.7;
-  }
-
-  /* TIMELINE */
-  .timeline {
-    position: relative;
-    padding-left: 2rem;
-    border-left: 1px solid rgba(240,90,40,0.3);
-    margin-top: 3rem;
-  }
-
-  .timeline-item {
-    position: relative;
-    padding-bottom: 2.5rem;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -2.4rem;
-    top: 6px;
-    width: 10px;
-    height: 10px;
-    background: var(--orange);
-    border-radius: 50%;
-  }
-
-  .timeline-date {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 0.3rem;
-  }
-
-  .timeline-title {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-    margin-bottom: 0.4rem;
-  }
-
-  .timeline-desc {
-    font-size: 0.9rem;
-    color: rgba(247,244,239,0.6);
-    line-height: 1.7;
-  }
-
-  /* DONATE */
-  .donate-section {
-    background: rgba(240,90,40,0.06);
-    border: 1px solid rgba(240,90,40,0.2);
-    padding: 4rem;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .donate-section h2 { margin-bottom: 1rem; }
-
-  .donate-section p {
-    color: rgba(247,244,239,0.7);
-    margin-bottom: 2rem;
-    font-weight: 300;
-    line-height: 1.8;
-  }
-
-  .donate-amounts {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
-
-  .amount-btn {
-    background: transparent;
-    border: 1px solid rgba(247,244,239,0.2);
-    color: var(--white);
-    padding: 0.7rem 1.5rem;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .amount-btn:hover, .amount-btn.active {
-    background: var(--orange);
-    border-color: var(--orange);
-    color: var(--black);
-  }
-
-  .custom-amount-wrap {
-    display: flex;
-    gap: 1rem;
-    max-width: 400px;
-    margin: 0 auto 2rem;
-  }
-
-  .custom-amount-wrap input {
-    flex: 1;
-    background: rgba(247,244,239,0.05);
-    border: 1px solid rgba(247,244,239,0.15);
-    color: var(--white);
-    padding: 0.8rem 1rem;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    outline: none;
-  }
-
-  .custom-amount-wrap input::placeholder { color: rgba(247,244,239,0.3); }
-  .custom-amount-wrap input:focus { border-color: var(--orange); }
-
-  .donate-note {
-    font-size: 0.8rem;
-    color: rgba(247,244,239,0.4);
-    margin-top: 1.5rem;
-  }
-
-  /* ADIDAS CALLOUT */
-  .adidas-section {
-    border: 1px dashed rgba(240,90,40,0.4);
-    padding: 3rem;
-    text-align: center;
-    margin: 0 auto;
-    max-width: 700px;
-  }
-
-  .adidas-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-
-  .adidas-section p {
-    color: rgba(247,244,239,0.7);
-    font-weight: 300;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-  }
-
-  /* FAQ */
-  .faq-list { margin-top: 3rem; }
-
-  .faq-item {
-    border-bottom: 1px solid rgba(247,244,239,0.08);
-    padding: 1.5rem 0;
-    cursor: pointer;
-  }
-
-  .faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .faq-toggle {
-    color: var(--orange);
-    font-size: 1.5rem;
-    transition: transform 0.3s;
-    flex-shrink: 0;
-    margin-left: 1rem;
-  }
-
-  .faq-answer {
-    display: none;
-    margin-top: 1rem;
-    color: rgba(247,244,239,0.65);
-    font-weight: 300;
-    line-height: 1.8;
-    font-size: 0.95rem;
-  }
-
-  .faq-item.open .faq-answer { display: block; }
-  .faq-item.open .faq-toggle { transform: rotate(45deg); }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid rgba(247,244,239,0.08);
-    padding: 3rem 2rem;
-    text-align: center;
-    color: rgba(247,244,239,0.35);
-    font-size: 0.85rem;
-  }
-
-  footer strong { color: var(--orange); }
-
-  /* ANIMATE IN */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem; }
-    .nav-links { display: none; }
-    .story-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .donate-section, .adidas-section { padding: 2rem; }
-    section { padding: 4rem 1.2rem; }
-    .hero { padding: 7rem 1.2rem 3rem; }
-    .hero-court { display: none; }
-  }
+:root {
+  --orange: #F05A28;
+  --orange-mid: #FF7A45;
+  --orange-pale: #FFF0EB;
+  --black: #111111;
+  --off-white: #F8F5F0;
+  --white: #FFFFFF;
+  --gray: #6B6B6B;
+  --gray-light: #E8E4DC;
+  --syne: 'Syne', sans-serif;
+  --serif: 'Instrument Serif', serif;
+  --mono: 'DM Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--off-white);color:var(--black);font-family:var(--syne);font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2.5rem;background:rgba(248,245,240,0.94);backdrop-filter:blur(12px);border-bottom:1.5px solid var(--black);}
+.nav-logo{font-family:var(--syne);font-weight:800;font-size:1.05rem;letter-spacing:0.05em;text-decoration:none;color:var(--black);display:flex;align-items:center;gap:0.6rem;}
+.dot{width:10px;height:10px;background:var(--orange);border-radius:50%;display:inline-block;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--black);text-decoration:none;opacity:0.5;transition:opacity 0.2s;}
+.nav-links a:hover{opacity:1;}
+.nav-cta{background:var(--orange)!important;color:var(--white)!important;padding:0.5rem 1.4rem!important;opacity:1!important;font-weight:700;}
+.nav-cta:hover{background:var(--black)!important;}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;border-bottom:1.5px solid var(--black);padding-top:72px;}
+.hero-left{padding:5rem 3rem 4rem 2.5rem;border-right:1.5px solid var(--black);display:flex;flex-direction:column;justify-content:space-between;}
+.hero-right{background:var(--orange);padding:5rem 3rem 4rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+.hero-right::after{content:'2026';position:absolute;bottom:-30px;right:-10px;font-family:var(--syne);font-weight:800;font-size:12rem;color:rgba(0,0,0,0.08);line-height:1;pointer-events:none;}
+.eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:2rem;}
+h1{font-family:var(--syne);font-weight:800;font-size:clamp(2.8rem,5.2vw,5.2rem);line-height:0.94;letter-spacing:-0.02em;margin-bottom:2rem;}
+.hero-body{font-family:var(--serif);font-style:italic;font-size:1.15rem;line-height:1.8;color:var(--gray);margin-bottom:2.5rem;max-width:460px;}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{display:inline-block;padding:0.9rem 2rem;font-family:var(--syne);font-weight:700;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.15s;cursor:pointer;border:none;}
+.btn-dark{background:var(--black);color:var(--white);}
+.btn-dark:hover{background:var(--orange);}
+.btn-outline{background:transparent;color:var(--black);border:1.5px solid var(--black);}
+.btn-outline:hover{background:var(--black);color:var(--white);}
+.btn-white{background:var(--white);color:var(--black);}
+.btn-white:hover{background:var(--black);color:var(--white);}
+.btn-orange{background:var(--orange);color:var(--white);}
+.btn-orange:hover{background:var(--black);}
+
+.cd-row{display:inline-flex;border:1.5px solid var(--black);overflow:hidden;}
+.cd-cell{background:var(--black);padding:1.1rem 1.6rem;border-right:1px solid rgba(255,255,255,0.1);}
+.cd-cell:last-child{border-right:none;}
+.cd-num{font-family:var(--syne);font-weight:800;font-size:2.6rem;color:var(--white);line-height:1;display:block;}
+.cd-lbl{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:0.2rem;}
+
+.hero-right-top{position:relative;z-index:1;}
+.h-date{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:1.2rem;}
+.h-quote{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--white);line-height:1.65;margin-bottom:2rem;}
+.hero-right-bot{position:relative;z-index:1;}
+.h-goal-lbl{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:0.5rem;}
+.h-goal{font-family:var(--syne);font-weight:800;font-size:3.2rem;color:var(--white);line-height:1;}
+.h-split{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.7);font-size:0.92rem;margin-top:0.4rem;}
+
+.ticker{background:var(--black);overflow:hidden;white-space:nowrap;padding:0.85rem 0;border-bottom:1.5px solid var(--black);}
+.ticker-inner{display:inline-block;animation:tick 22s linear infinite;font-family:var(--syne);font-weight:700;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+.prog-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1.5px solid var(--black);}
+.prog-cell{padding:2.2rem 2.5rem;border-right:1.5px solid var(--black);}
+.prog-cell:last-child{border-right:none;}
+.prog-num{font-family:var(--syne);font-weight:800;font-size:2.6rem;line-height:1;color:var(--orange);}
+.prog-lbl{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);margin-top:0.4rem;}
+.bar-wrap{padding:1.2rem 2.5rem 1.8rem;border-bottom:1.5px solid var(--black);}
+.bar-meta{display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);}
+.bar-bg{height:3px;background:var(--gray-light);position:relative;}
+.bar-fill{height:100%;background:var(--orange);width:0%;transition:width 2s cubic-bezier(0.4,0,0.2,1);}
+
+.sec{padding:5rem 2.5rem;border-bottom:1.5px solid var(--black);}
+.sec-hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4rem;gap:2rem;}
+.sec-tag{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);padding-top:0.4rem;white-space:nowrap;}
+h2{font-family:var(--syne);font-weight:800;font-size:clamp(2rem,3.8vw,3.5rem);line-height:1;letter-spacing:-0.02em;}
+
+.story-grid{display:grid;grid-template-columns:3fr 2fr;gap:4rem;align-items:start;}
+.sbody p{font-family:var(--serif);font-style:italic;font-size:1.1rem;line-height:1.85;color:#3a3a3a;margin-bottom:1.4rem;}
+.sbody strong{font-style:normal;color:var(--black);}
+.orange-card{background:var(--orange);padding:2.5rem;margin-bottom:1.5rem;}
+.orange-card p{font-family:var(--serif);font-style:italic;font-size:1.05rem;line-height:1.75;color:var(--white);}
+.orange-card .sig{margin-top:1rem;font-family:var(--syne);font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.65);font-style:normal;}
+.border-card{border:1.5px solid var(--black);padding:2rem;}
+.border-card p{font-size:0.9rem;line-height:1.8;color:var(--gray);}
+
+/* LEDGER */
+.ledger-sec{background:var(--black);color:var(--white);padding:5rem 2.5rem;border-bottom:1.5px solid var(--black);}
+.ledger-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start;}
+.l-text p{font-family:var(--serif);font-style:italic;font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,0.72);margin-bottom:1.2rem;}
+.l-text strong{font-style:normal;color:var(--orange);}
+.ledger-box{border:1px solid rgba(255,255,255,0.12);overflow:hidden;}
+.ledger-tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:0.78rem;}
+.ledger-tbl th{background:rgba(240,90,40,0.12);color:var(--orange);padding:0.75rem 1rem;text-align:left;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;font-size:0.65rem;border-bottom:1px solid rgba(255,255,255,0.1);}
+.ledger-tbl td{padding:0.7rem 1rem;border-bottom:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);}
+.ledger-tbl tr:last-child td{border-bottom:none;}
+.tbl-amt{color:var(--white);}
+.tbl-pend{color:rgba(240,90,40,0.75);}
+.ledger-foot{padding:0.7rem 1rem;background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.08);font-family:var(--mono);font-size:0.68rem;color:rgba(255,255,255,0.3);}
+.l-note{margin-top:1.5rem;padding:1.5rem;border:1px solid rgba(255,255,255,0.08);}
+.l-note p{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.7;}
+.l-note strong{color:var(--orange);font-style:normal;}
+
+.funds-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--black);margin-top:3rem;}
+.fund{padding:2.5rem;border-right:1.5px solid var(--black);}
+.fund:last-child{border-right:none;}
+.fund-pct{font-family:var(--syne);font-weight:800;font-size:4rem;line-height:1;color:var(--orange);margin-bottom:1rem;}
+.fund-name{font-weight:700;font-size:0.9rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.8rem;}
+.fund-desc{font-family:var(--serif);font-style:italic;font-size:0.9rem;line-height:1.75;color:var(--gray);}
+
+/* DONATE */
+.donate-sec{background:var(--orange);padding:5rem 2.5rem;border-bottom:1.5px solid var(--black);}
+.donate-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5px;background:var(--black);border:1.5px solid var(--black);margin-top:3rem;}
+.d-card{background:var(--white);padding:2.5rem;}
+.d-tag{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);margin-bottom:0.7rem;}
+.d-card h3{font-family:var(--syne);font-weight:800;font-size:1.5rem;margin-bottom:0.8rem;}
+.d-card .d-body{font-family:var(--serif);font-style:italic;font-size:0.9rem;line-height:1.72;color:var(--gray);margin-bottom:1.5rem;}
+.twint-placeholder{width:120px;height:120px;border:1.5px dashed var(--gray-light);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.62rem;color:var(--gray);text-align:center;line-height:1.5;padding:0.8rem;margin-bottom:1rem;}
+.twint-num{font-family:var(--mono);font-size:0.8rem;color:var(--black);margin-bottom:0.4rem;}
+.d-hint{font-size:0.72rem;color:var(--gray);font-family:var(--serif);font-style:italic;line-height:1.5;}
+.pills{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.pill{border:1.5px solid var(--black);padding:0.4rem 1rem;font-family:var(--syne);font-weight:700;font-size:0.8rem;cursor:pointer;background:transparent;transition:all 0.15s;}
+.pill:hover,.pill.active{background:var(--black);color:var(--white);}
+.amt-in{width:100%;border:1.5px solid var(--black);background:var(--off-white);padding:0.8rem 1rem;font-family:var(--syne);font-size:1rem;font-weight:700;outline:none;margin-bottom:1rem;}
+.amt-in:focus{border-color:var(--orange);}
+.crypto-addr{font-family:var(--mono);font-size:0.68rem;background:var(--off-white);border:1px solid var(--gray-light);padding:0.6rem 0.8rem;word-break:break-all;color:var(--black);margin-bottom:0.4rem;cursor:pointer;transition:background 0.15s;line-height:1.6;}
+.crypto-addr:hover{background:var(--gray-light);}
+.copy-lbl{font-size:0.65rem;color:var(--gray);letter-spacing:0.05em;font-family:var(--mono);}
+.chain-lbl{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin:1rem 0 0.4rem;}
+
+.tl-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid var(--black);margin-top:3rem;}
+.tl-step{padding:2.5rem 2rem;border-right:1.5px solid var(--black);}
+.tl-step:last-child{border:none;background:var(--orange);}
+.tl-n{font-family:var(--syne);font-weight:800;font-size:3.5rem;line-height:1;color:var(--gray-light);margin-bottom:1rem;}
+.tl-n-w{color:rgba(255,255,255,0.2);}
+.tl-date{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;}
+.tl-date-w{color:rgba(255,255,255,0.75)!important;}
+.tl-title{font-weight:700;font-size:0.95rem;margin-bottom:0.6rem;}
+.tl-title-w{color:var(--white)!important;}
+.tl-desc{font-family:var(--serif);font-style:italic;font-size:0.88rem;line-height:1.7;color:var(--gray);}
+.tl-desc-w{color:rgba(255,255,255,0.8)!important;}
+
+.faq-item{border-top:1.5px solid var(--black);}
+.faq-item:last-child{border-bottom:1.5px solid var(--black);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 0;cursor:pointer;font-weight:700;font-size:0.95rem;user-select:none;}
+.faq-ico{width:26px;height:26px;border:1.5px solid var(--black);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-left:1rem;transition:all 0.3s;}
+.faq-item.open .faq-ico{background:var(--orange);border-color:var(--orange);color:var(--white);transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;font-family:var(--serif);font-style:italic;font-size:0.95rem;line-height:1.82;color:var(--gray);}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:1.5rem;}
+
+footer{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1.5px solid var(--black);}
+.ft-cell{padding:2.8rem 2.5rem;border-right:1.5px solid var(--black);}
+.ft-cell:last-child{border-right:none;}
+.ft-lbl{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);margin-bottom:0.8rem;}
+.ft-cell p{font-family:var(--serif);font-style:italic;color:var(--gray);font-size:0.9rem;line-height:1.7;}
+.ft-cell a{color:var(--orange);text-decoration:none;}
+.ft-bot{grid-column:1/-1;border-top:1.5px solid var(--black);padding:1.4rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--black);color:var(--white);padding:0.7rem 1.4rem;font-family:var(--syne);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;z-index:9999;opacity:0;transform:translateY(8px);transition:all 0.25s;pointer-events:none;}
+.toast.show{opacity:1;transform:none;}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{border-top:1.5px solid var(--black);}
+  nav{padding:1rem 1.2rem;}
+  .nav-links{display:none;}
+  .prog-row{grid-template-columns:1fr 1fr;}
+  .story-grid,.ledger-grid,.donate-grid,.tl-grid,.funds-grid,footer{grid-template-columns:1fr;}
+  .fund,.tl-step,.ft-cell{border-right:none;border-bottom:1.5px solid var(--black);}
+  .tl-step:last-child{border-bottom:none;}
+  .sec{padding:3rem 1.2rem;}
+  .sec-hd{flex-direction:column;}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<div class="toast" id="toast">Copied ✓</div>
+
 <nav>
-  <a href="#" class="nav-logo">Bobcats 🏀</a>
+  <a href="#" class="nav-logo"><span class="dot"></span>LUGANO BOBCATS</a>
   <ul class="nav-links">
-    <li><a href="#story">Our Story</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#ledger">Ledger</a></li>
     <li><a href="#money">The Money</a></li>
-    <li><a href="#timeline">Timeline</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#donate" class="nav-cta">Donate</a></li>
+    <li><a href="#donate" class="btn nav-cta">Donate</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-court"></div>
-
-  <p class="hero-eyebrow">Lugano Bobcats · Ticino · 2026</p>
-  <h1>Give Every Kid a <span>Basket</span> and a Ball.</h1>
-  <p class="hero-sub">We are an amateur club born from nothing. By June 13th — the 3x3 Ticinotour Finals — we want to rebuild our courts, honor a friend, and prove that sport still saves lives.</p>
-
-  <div class="hero-deadline">
-    <div class="countdown-box">
-      <span class="countdown-num" id="cd-days">--</span>
-      <span class="countdown-label">Days</span>
+  <div class="hero-left">
+    <div>
+      <p class="eyebrow">Lugano · Ticino · June 2026</p>
+      <h1>Give Every Kid a Basket and a Ball.</h1>
+      <p class="hero-body">An amateur club born from nothing. A community ready to build something real — new courts, new gyms, and a city where sport belongs to everyone.</p>
+      <div class="hero-ctas">
+        <a href="#donate" class="btn btn-dark">Donate Now</a>
+        <a href="#story" class="btn btn-outline">Our Story</a>
+      </div>
     </div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-box">
-      <span class="countdown-num" id="cd-hours">--</span>
-      <span class="countdown-label">Hours</span>
-    </div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-box">
-      <span class="countdown-num" id="cd-mins">--</span>
-      <span class="countdown-label">Mins</span>
+    <div style="margin-top:4rem;">
+      <p style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.8rem;">Countdown to June 13th</p>
+      <div class="cd-row">
+        <div class="cd-cell"><span class="cd-num" id="cd-days">--</span><div class="cd-lbl">Days</div></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-hours">--</span><div class="cd-lbl">Hours</div></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-mins">--</span><div class="cd-lbl">Mins</div></div>
+      </div>
     </div>
   </div>
-
-  <div class="hero-buttons">
-    <a href="#donate" class="btn-primary">Donate Now</a>
-    <a href="#story" class="btn-secondary">Read Our Story</a>
+  <div class="hero-right">
+    <div class="hero-right-top">
+      <p class="h-date">3x3 Ticinotour Finals · June 13, 2026</p>
+      <p class="h-quote">"A new gym. New playgrounds. A ball and a pair of sneakers for every kid. Not a dream — a plan."</p>
+      <a href="#donate" class="btn btn-white">Support the Campaign</a>
+    </div>
+    <div class="hero-right-bot" style="margin-top:4rem;">
+      <p class="h-goal-lbl">Campaign Goal</p>
+      <p class="h-goal">CHF 1,000,000</p>
+      <p class="h-split">50% to amoreperilcancro · 50% to kids in Lugano</p>
+    </div>
   </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">NEW GYM &nbsp;·&nbsp; NEW PLAYGROUNDS &nbsp;·&nbsp; BALLS FOR EVERY KID &nbsp;·&nbsp; SNEAKERS &nbsp;·&nbsp; ORANGE T-SHIRTS &nbsp;·&nbsp; AMOREPERILCANCRO &nbsp;·&nbsp; JUNE 13 LUGANO &nbsp;·&nbsp; 3×3 TICINOTOUR &nbsp;·&nbsp; COMMUNITY FIRST &nbsp;·&nbsp; NEW GYM &nbsp;·&nbsp; NEW PLAYGROUNDS &nbsp;·&nbsp; BALLS FOR EVERY KID &nbsp;·&nbsp; SNEAKERS &nbsp;·&nbsp; ORANGE T-SHIRTS &nbsp;·&nbsp; AMOREPERILCANCRO &nbsp;·&nbsp; JUNE 13 LUGANO &nbsp;·&nbsp; 3×3 TICINOTOUR &nbsp;·&nbsp; COMMUNITY FIRST &nbsp;·&nbsp;</div>
 </div>
 
 <!-- PROGRESS -->
-<div class="progress-section">
-  <div class="progress-inner">
-    <div class="progress-stats">
-      <div class="stat-item">
-        <div class="stat-num" id="raised-display">CHF 0</div>
-        <div class="stat-label">Raised so far</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">CHF 1M</div>
-        <div class="stat-label">Goal</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">50%</div>
-        <div class="stat-label">Goes to amoreperilcancro</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" id="days-left-display">--</div>
-        <div class="stat-label">Days remaining</div>
-      </div>
-    </div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progress-fill"></div>
-    </div>
-    <p class="progress-note">Every franc matters. Half goes directly to cancer charity. The rest gives kids a ball and a place to play.</p>
-  </div>
+<div class="prog-row">
+  <div class="prog-cell"><div class="prog-num" id="raised-num">CHF 0</div><div class="prog-lbl">Raised so far</div></div>
+  <div class="prog-cell"><div class="prog-num">CHF 1M</div><div class="prog-lbl">Goal</div></div>
+  <div class="prog-cell"><div class="prog-num">50%</div><div class="prog-lbl">To amoreperilcancro</div></div>
+  <div class="prog-cell"><div class="prog-num" id="days-left">--</div><div class="prog-lbl">Days remaining</div></div>
+</div>
+<div class="bar-wrap">
+  <div class="bar-meta"><span>Progress</span><span id="pct-txt" style="color:var(--orange);">0%</span></div>
+  <div class="bar-bg"><div class="bar-fill" id="bar-fill"></div></div>
 </div>
 
 <!-- STORY -->
-<section id="story">
-  <p class="section-label fade-in">Who We Are</p>
+<div class="sec reveal" id="story">
+  <div class="sec-hd">
+    <span class="sec-tag">01 — Who We Are</span>
+    <h2>Born from Nothing.<br>Building Everything.</h2>
+  </div>
   <div class="story-grid">
-    <div class="story-text fade-in">
-      <h2>Born from Nothing.<br>Built on Love.</h2>
-      <p>The <strong>Lugano Bobcats</strong> didn't start with money, a facility, or a sponsor. We started with a ball, a broken court, and the belief that basketball teaches what schools often can't — resilience, brotherhood, and the discipline to get back up.</p>
-      <p>We exist because the streets of Lugano deserve better. Because kids need a place to go, a game to play, and someone to show them that the world doesn't have to be as ridiculous as it seems.</p>
-      <p>This campaign is about <strong>education through sport and money</strong>. We want people to understand that small, honest contributions — directed with clarity and accountability — can rebuild communities from the ground up.</p>
+    <div class="sbody">
+      <p>The <strong>Lugano Bobcats</strong> started without a facility, without a sponsor, without anyone asking us to exist. We showed up on a court that needed work and decided to make something out of it anyway.</p>
+      <p>This campaign is about what happens when a community moves together. A <strong>new gym</strong>. New playgrounds in the streets of Lugano. Basketballs for kids who have never had a real one. Sneakers for the ones who need them. Orange t-shirts so every kid knows they belong to something.</p>
+      <p>We are lucky to play sport. Not everyone is. This campaign exists to change that — to take what we have been given and multiply it for the next generation coming up in Ticino.</p>
+      <p>On <strong>June 13th, 2026</strong>, we play the 3x3 Ticinotour Finals in Lugano. That is our deadline. Whatever we raise goes out that day — no delays, no excuses, full public ledger.</p>
     </div>
-    <div class="fade-in">
-      <div class="tribute-box">
-        <p>"My friend built amoreperilcancro before he left us. He poured everything into that charity. This campaign is my way of finally honoring what he started — making sure his work reaches people who need it, through the sport that raised me."</p>
-        <div class="tribute-sig">— Founder, Lugano Bobcats</div>
-      </div>
-      <br>
-      <div class="tribute-box" style="border-color: rgba(247,244,239,0.2); background: rgba(247,244,239,0.03); margin-top: 1rem;">
-        <p>On <strong>June 13th, 2026</strong>, we play the 3x3 Ticinotour Finals in Lugano. That's our deadline. That's our stage. Whatever we raise by then goes out — no delays, no excuses.</p>
-      </div>
+    <div>
+      <div class="orange-card"><p>"We are not asking for charity. We are asking people to invest in what their city can become when sport is truly accessible to everyone."</p><p class="sig">— Founder, Lugano Bobcats</p></div>
+      <div class="border-card"><p>Also donating to <strong style="color:var(--black);">amoreperilcancro</strong> — a Ticino cancer charity that deserves more reach and more support. 50% of everything raised goes directly there, transferred on June 13th with full public documentation.</p></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- WHERE THE MONEY GOES -->
-<section id="money" style="padding-top: 0;">
-  <p class="section-label fade-in">Transparency</p>
-  <h2 class="fade-in">Where Every Franc Goes</h2>
+<!-- LEDGER -->
+<div class="ledger-sec reveal" id="ledger">
+  <div class="sec-hd" style="color:var(--white);">
+    <span class="sec-tag" style="color:rgba(255,255,255,0.38);">02 — Transparency</span>
+    <h2>What Is a <span style="color:var(--orange);">Ledger?</span></h2>
+  </div>
+  <div class="ledger-grid">
+    <div class="l-text">
+      <p>A <strong>ledger</strong> is simply a written record of every franc that comes in and every franc that goes out. Think of it like a notebook where you write down: who gave money, when, and how much — and then separately, what it was spent on, when, and with proof attached.</p>
+      <p>Banks use ledgers. Governments use ledgers. Companies use ledgers. Now so do we — because when you donate to something, you deserve to know exactly where your money landed.</p>
+      <p>Our ledger has two columns: <strong>In</strong> (donations received) and <strong>Out</strong> (money spent or transferred). Every entry has a date, a description, and a receipt or transfer confirmation.</p>
+      <p>It is <strong>public</strong>. Ask to see it any time — we reply within 24 hours. No exceptions, no surprises.</p>
+    </div>
+    <div>
+      <div class="ledger-box">
+        <table class="ledger-tbl">
+          <thead><tr><th>Date</th><th>Description</th><th>In</th><th>Out</th></tr></thead>
+          <tbody>
+            <tr><td>01.06.26</td><td>Campaign opens</td><td class="tbl-amt">—</td><td>—</td></tr>
+            <tr><td>ongoing</td><td>Donations received</td><td class="tbl-amt">recorded daily</td><td>—</td></tr>
+            <tr><td>13.06.26</td><td>amoreperilcancro transfer</td><td>—</td><td class="tbl-pend">50% of total</td></tr>
+            <tr><td>13.06.26</td><td>Equipment purchase</td><td>—</td><td class="tbl-pend">receipt posted</td></tr>
+            <tr><td>13.06.26</td><td>June 13 giveaway</td><td>—</td><td class="tbl-pend">photos posted</td></tr>
+          </tbody>
+        </table>
+        <div class="ledger-foot">Live ledger · all entries dated and receipted · request full doc: bobcats@example.com</div>
+      </div>
+      <div class="l-note"><p>In accounting, a ledger records <strong>debits</strong> (money going out) and <strong>credits</strong> (money coming in). Ours works the same way — one simple document, fully open to the public.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHERE MONEY GOES -->
+<div class="sec reveal" id="money">
+  <div class="sec-hd">
+    <span class="sec-tag">03 — Allocation</span>
+    <h2>Where Every<br>Franc Goes</h2>
+  </div>
   <div class="funds-grid">
-    <div class="fund-card fade-in" data-pct="50%">
-      <div class="fund-icon">🎗️</div>
-      <div class="fund-title">Amoreperilcancro</div>
-      <div class="fund-desc">50% of all donations go directly to this cancer charity founded by a friend we lost. No intermediaries. Full public ledger.</div>
+    <div class="fund">
+      <div class="fund-pct">50%</div>
+      <div class="fund-name">Amoreperilcancro</div>
+      <div class="fund-desc">A Ticino cancer charity. Donated on June 13th, in public, with the full transfer document posted to our ledger and shared on social media.</div>
     </div>
-    <div class="fund-card fade-in" data-pct="30%">
-      <div class="fund-icon">🏀</div>
-      <div class="fund-title">Balls & Equipment</div>
-      <div class="fund-desc">Basketballs for every kid who needs one. June 13th: we give them out at the Ticinotour Finals. Simple as that.</div>
+    <div class="fund">
+      <div class="fund-pct">30%</div>
+      <div class="fund-name">Balls & Sneakers</div>
+      <div class="fund-desc">Basketballs and sneakers for kids in Lugano. Distributed in person at the 3x3 Ticinotour Finals, every purchase documented and receipted.</div>
     </div>
-    <div class="fund-card fade-in" data-pct="20%">
-      <div class="fund-icon">👕</div>
-      <div class="fund-title">Orange T-Shirts</div>
-      <div class="fund-desc">Every kid gets a Bobcats shirt. Not just merchandise — identity, belonging, and a reminder that someone believed in them.</div>
-    </div>
-  </div>
-  <p style="margin-top:2rem; color: rgba(247,244,239,0.45); font-size:0.85rem;">
-    ⚡ Full ledger maintained by the founder. All receipts public. If you ever doubt where your money went — ask. You'll get an answer within 24 hours.
-  </p>
-</section>
-
-<!-- ADIDAS CALLOUT -->
-<section style="padding-top: 0;">
-  <div class="adidas-section fade-in">
-    <h2>Hey, Adidas. 👋</h2>
-    <p>We know you're busy. But imagine your three stripes on the courts of Lugano, on the backs of kids who've never had a sponsor believe in them. We're not asking for a deal. We're asking for a gesture. Send us a shipment of balls and shirts before June 13th, and we'll make sure the streets of Ticino never forget it.</p>
-    <a href="mailto:bobcats@example.com?subject=Adidas%20x%20Lugano%20Bobcats" class="btn-primary" style="font-size:1rem;">Write to Us</a>
-  </div>
-</section>
-
-<!-- TIMELINE -->
-<section id="timeline">
-  <p class="section-label fade-in">The Plan</p>
-  <h2 class="fade-in">From June 1st<br>to June 13th</h2>
-  <div class="timeline">
-    <div class="timeline-item fade-in">
-      <div class="timeline-date">June 1, 2026</div>
-      <div class="timeline-title">Campaign Launches</div>
-      <div class="timeline-desc">Website goes live. First post drops. We tell the world who we are and why this matters.</div>
-    </div>
-    <div class="timeline-item fade-in">
-      <div class="timeline-date">June 1–12, 2026</div>
-      <div class="timeline-title">13 Days of Truth</div>
-      <div class="timeline-desc">Every day, one post. No marketing. No bullshit. Just honest reasons why people should have faith.</div>
-    </div>
-    <div class="timeline-item fade-in">
-      <div class="timeline-date">June 12, 2026</div>
-      <div class="timeline-title">Final Push</div>
-      <div class="timeline-desc">We share everything we've raised. We contact amoreperilcancro. We prepare the equipment.</div>
-    </div>
-    <div class="timeline-item fade-in">
-      <div class="timeline-date">June 13, 2026</div>
-      <div class="timeline-title">3x3 Ticinotour Finals — Lugano</div>
-      <div class="timeline-desc">We play. We distribute balls and shirts. We donate to the charity. We honor our friend. We celebrate what community can do.</div>
+    <div class="fund">
+      <div class="fund-pct">20%</div>
+      <div class="fund-name">Orange T-Shirts</div>
+      <div class="fund-desc">Every kid who wants a Bobcats shirt gets one. A uniform. An identity. A reminder that somebody in this city believed they were worth something.</div>
     </div>
   </div>
-</section>
+  <p style="margin-top:2rem;font-family:var(--mono);font-size:0.72rem;color:var(--gray);">⚡ Zero management fees. The founder is unpaid. Every receipt is public on request.</p>
+</div>
 
 <!-- DONATE -->
-<section id="donate" style="padding-top: 0;">
-  <div class="donate-section fade-in">
-    <p class="section-label" style="text-align:center;">Make It Real</p>
-    <h2>Donate</h2>
-    <p>You don't need to give a thousand francs. You need to give what you believe this is worth. Every franc is a vote that sport still matters, that kids still deserve chances, and that friends don't leave in vain.</p>
-
-    <div class="donate-amounts">
-      <button class="amount-btn" onclick="selectAmount(10)">CHF 10</button>
-      <button class="amount-btn" onclick="selectAmount(25)">CHF 25</button>
-      <button class="amount-btn" onclick="selectAmount(50)">CHF 50</button>
-      <button class="amount-btn" onclick="selectAmount(100)">CHF 100</button>
-    </div>
-
-    <div class="custom-amount-wrap">
-      <input type="number" id="custom-amount" placeholder="Custom amount (CHF)" min="1">
-      <button class="btn-primary" style="white-space:nowrap; font-size:0.95rem;" onclick="handleDonate()">Donate</button>
-    </div>
-
-    <p class="donate-note">
-      💳 &nbsp;To accept real payments, connect this to Stripe, PayPal, or TWINT (instructions in the README below).<br>
-      📧 &nbsp;For now, clicking Donate will open an email with the amount so you can coordinate manually.
-    </p>
+<div class="donate-sec reveal" id="donate">
+  <div class="sec-hd">
+    <span class="sec-tag" style="color:rgba(255,255,255,0.6);">04 — Support</span>
+    <h2 style="color:var(--white);">Choose How<br>You Give</h2>
   </div>
-</section>
+  <div class="donate-grid">
+
+    <div class="d-card">
+      <p class="d-tag">Switzerland · Instant</p>
+      <h3>TWINT</h3>
+      <p class="d-body">The fastest way to donate in Switzerland. Scan the QR code below from your banking app, or send directly to our TWINT number. No account needed beyond your existing Swiss bank.</p>
+      <div class="twint-placeholder">Add your TWINT QR code image here (see guide)</div>
+      <p class="twint-num">TWINT: <strong>+41 78 330 32 10</strong></p>
+      <p class="d-hint">Replace the number above with your real TWINT number from your banking app settings.</p>
+    </div>
+
+    <div class="d-card">
+      <p class="d-tag">All Countries · Email Confirmation</p>
+      <h3>Bank Transfer</h3>
+      <p class="d-body">For anyone inside or outside Switzerland. Pick an amount, click the button, and we will reply with our bank details. Your donation gets added to the public ledger.</p>
+      <div class="pills">
+        <button class="pill" onclick="setPill(this,10)">CHF 10</button>
+        <button class="pill" onclick="setPill(this,25)">CHF 25</button>
+        <button class="pill" onclick="setPill(this,50)">CHF 50</button>
+        <button class="pill" onclick="setPill(this,100)">CHF 100</button>
+      </div>
+      <input class="amt-in" type="number" id="amt" placeholder="Custom amount (CHF)" min="1">
+      <button class="btn btn-dark" style="width:100%;" onclick="handleDonate()">Request Bank Details ↗</button>
+      <p class="d-hint" style="margin-top:0.7rem;">Opens an email to us. We reply within a few hours with IBAN and payment details.</p>
+    </div>
+
+    <div class="d-card">
+      <p class="d-tag">Global · Decentralised</p>
+      <h3>Crypto</h3>
+      <p class="d-body">We accept Bitcoin and Bitcoin via Mail. Copy the address, send any amount from your wallet app, then email us the transaction ID so we can confirm and log it in the ledger.</p>
+      <p class="chain-lbl">Bitcoin (BTC)</p>
+      <div class="crypto-addr" onclick="copyAddr('YOUR_BTC_ADDRESS_HERE')">YOUR_BTC_ADDRESS_HERE</div>
+      <p class="chain-lbl">Bitcoin via Mail (BTC)</p>
+      <div class="crypto-addr" onclick="copyAddr('YOUR_ETH_ADDRESS_HERE')">bc1q4weu0sgwx80995qnjgmkj3hhuk6frx2llhrh9a</div>
+      <p class="copy-lbl" style="margin-top:0.5rem;">↑ Click either address to copy. Then paste it in your crypto wallet app.</p>
+      <p class="d-hint" style="margin-top:1rem;">Replace the addresses above with your real wallet addresses. Get these from Coinbase, Trust Wallet, or whichever app you use.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="sec reveal" id="timeline">
+  <div class="sec-hd">
+    <span class="sec-tag">05 — Schedule</span>
+    <h2>June 1st<br>to June 13th</h2>
+  </div>
+  <div class="tl-grid">
+    <div class="tl-step">
+      <div class="tl-n">01</div>
+      <div class="tl-date">June 1, 2026</div>
+      <div class="tl-title">Campaign Opens</div>
+      <div class="tl-desc">Website live. First post drops. We tell Ticino what we are building and why it matters.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-n">02</div>
+      <div class="tl-date">June 1–12</div>
+      <div class="tl-title">13 Days of Posts</div>
+      <div class="tl-desc">One honest post every day. No marketing. Just real reasons to believe in the future we're building.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-n">03</div>
+      <div class="tl-date">June 12</div>
+      <div class="tl-title">Final 24 Hours</div>
+      <div class="tl-desc">Total raised published. Equipment ordered. amoreperilcancro transfer prepared.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-n tl-n-w">04</div>
+      <div class="tl-date tl-date-w">June 13, 2026</div>
+      <div class="tl-title tl-title-w">3x3 Ticinotour Finals</div>
+      <div class="tl-desc tl-desc-w">We play. We distribute. We donate. We celebrate what a community can build when it decides to move together.</div>
+    </div>
+  </div>
+</div>
 
 <!-- FAQ -->
-<section id="faq">
-  <p class="section-label fade-in">Questions</p>
-  <h2 class="fade-in">We Have Nothing to Hide</h2>
-  <div class="faq-list">
-    <div class="faq-item fade-in" onclick="toggleFaq(this)">
-      <div class="faq-question">Who are the Lugano Bobcats? <span class="faq-toggle">+</span></div>
-      <div class="faq-answer">An amateur basketball club from Lugano, Ticino. We started from nothing — no facility, no sponsor, no institutional backing. Just people who believe sport can rebuild streets and lives.</div>
+<div class="sec reveal" id="faq">
+  <div class="sec-hd">
+    <span class="sec-tag">06 — Questions</span>
+    <h2>Nothing<br>to Hide</h2>
+  </div>
+  <div style="margin-top:1rem;">
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Who are the Lugano Bobcats?<span class="faq-ico">+</span></div>
+      <div class="faq-a">An amateur basketball club from Lugano, Switzerland. No institutional backing, no professional sponsors. Built by people who believe sport should be accessible to every kid in this city, regardless of what they can afford.</div>
     </div>
-    <div class="faq-item fade-in" onclick="toggleFaq(this)">
-      <div class="faq-question">Who is amoreperilcancro? <span class="faq-toggle">+</span></div>
-      <div class="faq-answer">A cancer charity founded by a close friend of our founder before he passed away from the illness. Half of every donation goes directly to this charity as a tribute to him and the work he started.</div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What is amoreperilcancro?<span class="faq-ico">+</span></div>
+      <div class="faq-a">A cancer charity based in Ticino. Half of every donation from this campaign goes directly to them — transferred on June 13th with full public documentation available to anyone who asks.</div>
     </div>
-    <div class="faq-item fade-in" onclick="toggleFaq(this)">
-      <div class="faq-question">How do I know my money goes where you say? <span class="faq-toggle">+</span></div>
-      <div class="faq-answer">The founder maintains a public ledger of all receipts and transfers. Everything is documented. If you ever want to verify — email us and you'll get a response within 24 hours, with proof.</div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What is a ledger and how can I see it?<span class="faq-ico">+</span></div>
+      <div class="faq-a">A ledger is a full record of every franc in and every franc out — dates, amounts, recipients, and receipts attached. Ours is public. Email us any time and you will receive the complete document within 24 hours. No exceptions.</div>
     </div>
-    <div class="faq-item fade-in" onclick="toggleFaq(this)">
-      <div class="faq-question">What happens on June 13th? <span class="faq-toggle">+</span></div>
-      <div class="faq-answer">The 3x3 Ticinotour Finals in Lugano. We play, we distribute balls and orange t-shirts to kids in the community, and we make the donation to amoreperilcancro publicly, in person.</div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">How do I donate with TWINT?<span class="faq-ico">+</span></div>
+      <div class="faq-a">Open your Swiss banking app (UBS, PostFinance, Raiffeisen, Cantonal bank — they all have TWINT built in). Go to TWINT, scan our QR code or send to our TWINT number. The donation arrives instantly. We log it in the ledger and confirm by email.</div>
     </div>
-    <div class="faq-item fade-in" onclick="toggleFaq(this)">
-      <div class="faq-question">What if you don't reach 1 million francs? <span class="faq-toggle">+</span></div>
-      <div class="faq-answer">Then we reach whatever we reach — and every franc of it still goes exactly where we said. The million was a dream. The mission is real regardless of the number.</div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">How do I donate with crypto?<span class="faq-ico">+</span></div>
+      <div class="faq-a">Click the Bitcoin or Ethereum address in the Donate section to copy it. Open your crypto wallet app (Coinbase, Trust Wallet, MetaMask, or any other), choose "Send", paste our address, enter any amount, and confirm. Then email us the transaction ID so we can verify it and add it to the ledger.</div>
     </div>
-    <div class="faq-item fade-in" onclick="toggleFaq(this)">
-      <div class="faq-question">Can Adidas actually just send equipment? <span class="faq-toggle">+</span></div>
-      <div class="faq-answer">Yes. Please. We're serious. Email us at the contact below. We'll make sure it gets to the right kids.</div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What if you don't reach CHF 1,000,000?<span class="faq-ico">+</span></div>
+      <div class="faq-a">Then we reach whatever we reach — and every franc of it goes exactly where we said. The million is the dream we said out loud. The mission works at any amount. One donation buys two balls. That is real and it counts.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Can Adidas just send equipment?<span class="faq-ico">+</span></div>
+      <div class="faq-a">Yes. Please. We are serious. We have kids, we have a date, and we have a court. Email us and we will make it happen.</div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <p><strong>Lugano Bobcats</strong> · Give every kid a basket and a ball.</p>
-  <p style="margin-top:0.5rem;">Contact: <strong>bobcats@example.com</strong> (update this with your real email)</p>
-  <p style="margin-top:0.5rem;">3x3 Ticinotour Finals · June 13, 2026 · Lugano, Switzerland</p>
-  <p style="margin-top:1rem; font-size:0.75rem;">Built with faith, not budget. In memory of a friend.</p>
+  <div class="ft-cell">
+    <p class="ft-lbl">The Club</p>
+    <p>Lugano Bobcats — an amateur club from Ticino building courts and communities one campaign at a time.</p>
+  </div>
+  <div class="ft-cell">
+    <p class="ft-lbl">Contact</p>
+    <p>Email: <a href="mailto:luganobobcats@proton.me">luganobobcats@proton.me</a><br>Instagram: <a href="https://instagram.com/lvganobobcats" target="_blank">@lvganobobcats</a><br>TWINT: +41 78 330 12 10</p>
+  </div>
+  <div class="ft-cell">
+    <p class="ft-lbl">The Event</p>
+    <p>3x3 Ticinotour Finals<br>June 13, 2026<br>Lugano, Switzerland</p>
+  </div>
+  <div class="ft-bot">
+    <span>© 2026 Lugano Bobcats</span>
+    <span style="color:var(--orange);">Give every kid a basket and a ball.</span>
+    <span>Public ledger available on request</span>
+  </div>
 </footer>
 
 <script>
-// COUNTDOWN
-function updateCountdown() {
-  const target = new Date('2026-06-13T10:00:00');
-  const now = new Date();
-  const diff = target - now;
-  if (diff <= 0) {
-    document.getElementById('cd-days').textContent = '0';
-    document.getElementById('cd-hours').textContent = '0';
-    document.getElementById('cd-mins').textContent = '0';
-    document.getElementById('days-left-display').textContent = '0';
-    return;
-  }
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
-  document.getElementById('days-left-display').textContent = days;
+function updateCD(){
+  const t=new Date('2026-06-13T10:00:00'),n=new Date(),d=t-n;
+  if(d<=0){['cd-days','cd-hours','cd-mins'].forEach(i=>document.getElementById(i).textContent='00');document.getElementById('days-left').textContent='0';return;}
+  const days=Math.floor(d/(86400000));
+  document.getElementById('cd-days').textContent=String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+  document.getElementById('days-left').textContent=days;
+}
+updateCD();setInterval(updateCD,30000);
+
+// ⬇ CHANGE THIS NUMBER WHEN YOU RECEIVE DONATIONS
+const RAISED=0;
+const GOAL=1000000;
+document.getElementById('raised-num').textContent='CHF '+RAISED.toLocaleString('de-CH');
+setTimeout(()=>{
+  const p=Math.min((RAISED/GOAL)*100,100);
+  document.getElementById('bar-fill').style.width=p+'%';
+  document.getElementById('pct-txt').textContent=p.toFixed(2)+'%';
+},500);
+
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+let selAmt=null;
+function setPill(btn,n){selAmt=n;document.querySelectorAll('.pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('amt').value=n;}
+
+function handleDonate(){
+  const a=document.getElementById('amt').value||selAmt;
+  if(!a||a<=0){alert('Please enter an amount.');return;}
+  const s=encodeURIComponent('Lugano Bobcats — Donation CHF '+a);
+  const b=encodeURIComponent('Hi,\n\nI would like to donate CHF '+a+' to the Lugano Bobcats campaign.\n\nPlease send me your bank details.\n\nThank you.');
+  window.location.href='mailto:luganobobcats@proton.me?subject='+s+'&body='+b;
 }
 
-updateCountdown();
-setInterval(updateCountdown, 60000);
-
-// PROGRESS BAR - Update this number as you receive donations!
-const AMOUNT_RAISED = 0; // <-- CHANGE THIS NUMBER WHEN YOU GET DONATIONS
-const GOAL = 1000000;
-
-document.getElementById('raised-display').textContent = 'CHF ' + AMOUNT_RAISED.toLocaleString('de-CH');
-setTimeout(() => {
-  const pct = Math.min((AMOUNT_RAISED / GOAL) * 100, 100);
-  document.getElementById('progress-fill').style.width = pct + '%';
-}, 500);
-
-// FADE IN ON SCROLL
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); }
+function copyAddr(addr){
+  navigator.clipboard.writeText(addr).then(()=>{
+    const t=document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2000);
   });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// FAQ
-function toggleFaq(item) {
-  item.classList.toggle('open');
-}
-
-// DONATE
-let selectedAmount = null;
-function selectAmount(n) {
-  selectedAmount = n;
-  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('custom-amount').value = n;
-}
-
-function handleDonate() {
-  const input = document.getElementById('custom-amount').value;
-  const amount = input || selectedAmount;
-  if (!amount || amount <= 0) { alert('Please enter an amount.'); return; }
-  const subject = encodeURIComponent('Lugano Bobcats Donation – CHF ' + amount);
-  const body = encodeURIComponent('Hi,\n\nI would like to donate CHF ' + amount + ' to the Lugano Bobcats campaign.\n\nPlease send me payment details.\n\nThank you!');
-  window.location.href = 'mailto:bobcats@example.com?subject=' + subject + '&body=' + body;
 }
 </script>
 </body>
